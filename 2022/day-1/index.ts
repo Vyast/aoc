@@ -1,38 +1,20 @@
 import { join } from "path";
 import { readFileSync } from "fs";
 
-const input = readFileSync(join(__dirname, "./input.txt"), "utf-8").split("\n");
+const input = readFileSync(join(__dirname, "./input.txt"), "utf-8").split(
+  "\n\n"
+);
 
-const elves: Array<number[]> = [];
-
-for (let i = 0, sub: number[] = []; i < input.length; i++) {
-  const line = input[i];
-
-  if (line.length === 0) {
-    elves.push(sub);
-    sub = [];
-  } else {
-    sub.push(Number(line));
-
-    if (i + 1 === input.length) {
-      elves.push(sub);
-      sub = [];
-    }
-  }
-}
+const elves = input.map((line) => line.split("\n").map((str) => Number(str)));
 
 export const parts = {
   1: () => {
-    let most_calories = undefined;
+    let most_calories = 0;
 
-    for (let elf = 0; elf < elves.length; elf++) {
-      const items = elves[elf];
+    for (const elf of elves) {
+      const total = elf.reduce((value, item) => value + item, 0);
 
-      const total = items.reduce((value, item) => value + item, 0);
-
-      if (!most_calories || total > most_calories) {
-        most_calories = total;
-      }
+      if (total > most_calories) most_calories = total;
     }
 
     console.log("ANSWER:", most_calories);
@@ -40,12 +22,8 @@ export const parts = {
   2: () => {
     const totals: number[] = [];
 
-    for (let elf = 0; elf < elves.length; elf++) {
-      const items = elves[elf];
-
-      const total = items.reduce((value, i) => {
-        return value + i;
-      }, 0);
+    for (const elf of elves) {
+      const total = elf.reduce((value, item) => value + item, 0);
 
       totals.push(total);
     }
