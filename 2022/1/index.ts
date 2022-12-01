@@ -1,7 +1,7 @@
-export const a = () => {
-  console.log("a");
+export const one = () => {
+  console.log("one!");
 };
 
-export const b = () => {
-  console.log("b");
+export const two = () => {
+  console.log("two!");
 };
