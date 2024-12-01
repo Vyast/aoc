@@ -1,37 +1,49 @@
 import { join } from "path";
 import { readFileSync } from "fs";
 
-const input = readFileSync(join(__dirname, "./input.txt"), "utf-8").split(
-  "\n\n"
-);
+const input = readFileSync(join(__dirname, "./input.txt"), "utf-8")
+  .split("\n")
+  .map((e) => e.split("   "));
 
-const elves = input.map((line) => line.split("\n").map((str) => Number(str)));
+const leftArray = input.map((e) => Number(e[0])).sort((a, b) => a - b);
+const rightArray = input.map((e) => Number(e[1])).sort((a, b) => a - b);
 
 export const parts = {
   1: () => {
-    let most_calories = 0;
+    let distance = 0;
 
-    for (const elf of elves) {
-      const total = elf.reduce((value, item) => value + item, 0);
+    for (let i = 0; i < leftArray.length; i++) {
+      const rightItem = rightArray[i];
+      const leftItem = leftArray[i];
 
-      if (total > most_calories) most_calories = total;
+      const greaterNum = Math.max(leftItem, rightItem);
+      const lesserNum = Math.min(leftItem, rightItem);
+
+      distance += greaterNum - lesserNum;
     }
 
-    console.log("ANSWER:", most_calories);
+    console.log("ANSWER:", distance);
   },
   2: () => {
-    const totals: number[] = [];
+    let score = 0;
 
-    for (const elf of elves) {
-      const total = elf.reduce((value, item) => value + item, 0);
+    const dupeNumsRight: Record<number, number> = {};
 
-      totals.push(total);
+    for (let i = 0; i < rightArray.length; i++) {
+      const num = rightArray[i];
+
+      if (dupeNumsRight[num]) dupeNumsRight[num] += 1;
+      else dupeNumsRight[num] = 1;
     }
 
-    const top_3 = totals.sort((a, b) => b - a).slice(0, 3);
+    for (let i = 0; i < leftArray.length; i++) {
+      const num = leftArray[i];
 
-    const total_calories = top_3.reduce((value, item) => value + item, 0);
+      const amount = dupeNumsRight[num];
 
-    console.log("ANSWER:", total_calories);
+      if (amount) score += num * amount;
+    }
+
+    console.log("ANSWER:", score);
   },
 };
