@@ -3,7 +3,7 @@ import { readFileSync } from "fs";
 
 const input = readFileSync(join(__dirname, "./input.txt"), "utf-8")
   .split("\n")
-  .map((e) => e.split("   "));
+  .map((e) => e.split(/\s+/));
 
 const leftArray = input.map((e) => Number(e[0])).sort((a, b) => a - b);
 const rightArray = input.map((e) => Number(e[1])).sort((a, b) => a - b);
@@ -13,13 +13,7 @@ export const parts = {
     let distance = 0;
 
     for (let i = 0; i < leftArray.length; i++) {
-      const rightItem = rightArray[i];
-      const leftItem = leftArray[i];
-
-      const greaterNum = Math.max(leftItem, rightItem);
-      const lesserNum = Math.min(leftItem, rightItem);
-
-      distance += greaterNum - lesserNum;
+      distance += Math.abs(leftArray[i] - rightArray[i]);
     }
 
     console.log("ANSWER:", distance);
