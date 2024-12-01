@@ -6,12 +6,9 @@
     "watch": "tsx watch ./index.ts",
     "check": "tsx ./index.ts"
   },
-  "engines": {
-    "node": "18.12.1"
-  },
   "devDependencies": {
-    "@types/node": "18.11.11",
-    "tsx": "^3.12.1",
-    "typescript": "^4.9.3"
+    "@types/node": "20.17.9",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
   }
 }
