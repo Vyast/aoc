@@ -4,11 +4,15 @@
   "description": "Advent of code solutions",
   "scripts": {
     "watch": "tsx watch ./index.ts",
-    "check": "tsx ./index.ts"
+    "check": "tsx ./index.ts",
+    "input": "tsx ./input.ts"
   },
   "devDependencies": {
     "@types/node": "20.17.9",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
   }
 }

@@ -1,16 +1,17 @@
-import { day_to_solve, current_year, part_to_solve } from "./config.json";
-
 const main = async () => {
   try {
+    const date = new Date();
+
     const module: {
       parts: { [part: number]: () => Promise<void> };
-    } = await import(`./${current_year}/day-${day_to_solve}`);
+    } = await import(`./${date.getFullYear()}/day-${date.getDate()}`);
 
-    await module.parts[part_to_solve]();
+    module.parts[1]();
+    module.parts[2]();
 
     console.log("Finished!");
-  } catch (error: any) {
-    throw new Error(error.message);
+  } catch (error) {
+    console.error(error);
   }
 };
 
