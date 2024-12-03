@@ -11,7 +11,7 @@ const input = async () => {
     const date = new Date();
 
     const resp = await fetch(
-      `https://adventofcode.com/${date.getFullYear()}/day/${date.getDate()}/input`,
+      `https://adventofcode.com/${date.getFullYear()}/day/3/input`,
       {
         headers: {
           Cookie: `session=${process.env.SESSION_COOKIE}`,
@@ -24,7 +24,7 @@ const input = async () => {
     const targetDir = path.join(
       process.cwd(),
       date.getFullYear().toString(),
-      `day-${date.getDate().toString()}`
+      "day-3"
     );
     const filePath = path.join(targetDir, "input.txt");
 

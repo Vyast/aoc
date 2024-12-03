@@ -4,7 +4,7 @@ const main = async () => {
 
     const module: {
       parts: { [part: number]: () => Promise<void> };
-    } = await import(`./${date.getFullYear()}/day-${date.getDate()}`);
+    } = await import(`./${date.getFullYear()}/day-3`);
 
     module.parts[1]();
     module.parts[2]();
